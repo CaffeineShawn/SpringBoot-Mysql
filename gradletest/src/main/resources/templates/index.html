@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
+<center>
+    <br><br>
+    <head>Esu! 自 我 出 道</head>
+    <br><br>
+
+    <body>
+    <p>
+    <form action="/greeting" method="post">
+        <div>
+            <input type="text" name="name" placeholder="name">
+        </div>
+        <div>
+            <input type="text" name="tel" placeholder="Tel">
+        </div>
+        <div>
+            <input type="text" name="mail" placeholder="Mail">
+        </div>
+        <div>
+            <textarea name="message" placeholder="Message">
+            </textarea>
+        </div>
+        <input type="submit">
+    </form>
+    </body>
+    </p>
+    </p></p></p></center>
+
+
+</html>
+<script>
+    jQuery.prototype.serializeObject=function(){
+        var obj=new Object();
+        $.each(this.serializeArray(),function(index,param){
+            if(!(param.name in obj)){
+                obj[param.name]=param.value;
+            }
+        });
+        console.log(obj);
+        return obj;
+    };
+</script></textarea>
