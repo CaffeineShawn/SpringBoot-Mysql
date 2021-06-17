@@ -31,6 +31,10 @@
 </template>
 
 <script>
+
+import Vue from "vue";
+import request from "@/utils/request";
+
 export default {
   name: 'HelloWorld',
   props: {

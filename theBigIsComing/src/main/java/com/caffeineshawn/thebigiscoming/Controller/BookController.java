@@ -9,26 +9,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:8080")
 public class BookController {
     @Autowired
     private BookRepository bookRepository;
+
 
     @GetMapping
     public Iterable findAll() {
         return bookRepository.findAll();
     }
 
+
     @GetMapping("/title/{bookTitle}")
     public List findByTitle(@PathVariable String bookTitle) {
         return bookRepository.findBookByTitle(bookTitle);
     }
 
+
     @GetMapping("/{id}")
     public Book findOne(@PathVariable Long id) {
         return bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
     }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,11 +42,13 @@ public class BookController {
         return bookRepository.save(book);
     }
 
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         bookRepository.deleteById(id);
     }
+
 
     @PutMapping("/{id}")
     public Book updateBook(@RequestBody Book book, @PathVariable Long id) {

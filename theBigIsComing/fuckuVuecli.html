@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <div id ="app">
+
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+
+    // function findAll() {
+    //     return axios.get('http:localhost:8081/home')
+    //         .then(function (response) {
+    //             console.log(response);
+    //         }).catch(function (err) {
+    //             console.log(err);
+    //         })
+    // }
+
+
+    // import axios from "axios";
+
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        mounted () {
+            // axios.get('http:localhost:8081/api/books')
+            axios.get('http://192.168.1.162:8081/api/books')
+                .then(function (response) {
+                    console.log(response);
+                }).catch(function (err) {
+                console.log(err);
+            })
+
+
+        }
+    });
+</script>
