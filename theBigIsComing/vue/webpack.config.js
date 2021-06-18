@@ -1,7 +1,6 @@
 // webpack.config.js
 
 
-
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,8 +27,8 @@ module.exports = {
                     presets: ['es2015']
                 }
             },
-            { test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url-loader?limit=8192' },
-            { test: /\.html$/, loader: 'html'},
+            {test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url-loader?limit=8192'},
+            {test: /\.html$/, loader: 'html'},
         ]
     },
     plugins: [
@@ -37,7 +36,16 @@ module.exports = {
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             template: './src/main/web/index.tmpl'
+        }),
+        new webpack.ProvidePlugin({
+
+            $: "jquery",
+
+            jQuery: "jquery",
+            "windows.jQuery": "jquery"
+
         })],
+
     devServer: {
         port: 8080,
         proxy: {

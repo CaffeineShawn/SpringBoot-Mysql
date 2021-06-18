@@ -20,7 +20,7 @@ public class BookController {
 
     @GetMapping
     public Iterable findAll() {
-        return bookRepository.findAll();
+        return bookRepository .findAll();
     }
 
 

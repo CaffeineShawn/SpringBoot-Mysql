@@ -1,35 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+  <div id='app'>
+    <AllBooks></AllBooks>
   </div>
+
 </template>
 
 <script>
-  import {getRequest} from "@/api/RESTfulAPI";
-  import axios from "axios";
+
+  import AllBooks from "@/components/AllBooks";
   export default {
-  name: 'App',
-  mounted() {
-    // getRequest('')
-    axios.get('http://localhost:8081/api/books')
-        .then(function (response) {
-          console.log(response);
-        }).catch(function (err){
-      console.log(err);
-    });
-    getRequest('')
-        .then(function (response) {
-          console.log('getRQ');
-        }).catch(function (err){
-      console.log(err);
-    });
+    name: 'App',
+    components: {AllBooks}
+
+
 
 
   }
-
-
-}
 
 
 </script>

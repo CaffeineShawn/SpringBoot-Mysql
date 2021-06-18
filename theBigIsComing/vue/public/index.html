@@ -1,18 +1,88 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="" xmlns="http://www.w3.org/1999/html">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!--    <link rel="icon" href="<%= BASE_URL %>favicon.ico">-->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script src="src/main.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="padding-left: 40px;">图书管理系统</a>
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" style="padding-right: 40px;" id="bs-example-navbar-collapse-1" >
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">欢迎用户: {{ username }}</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="jumbotron" style="padding-top: 50px">
+    <div class="container">
+        <div class="row">
+            <div id="Welcome" class="col">
+                <h1>Powered By Bootstrap</h1>
+                <p>Used SpringBoot, Vue, JPA, MySQL for my Course Design.</p>
+                <h3>@Caffeine Shawn</h3>
+                <div id="more" style="padding-top: 10px">
+                    <p><a class="btn btn-info" href="https://github.com/CaffeineShawn" role="button">Learn more</a></p>
+                </div>
+
+            </div>
+
+
+                <div id="userinfo" class="col" style="margin: auto">
+
+                    <form class="form-floating">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input  type="password-field" class="form-control" id="password" placeholder="请输入密码">
+                        </div>
+
+                        <div id="button-group" class="col" style="margin: auto">
+                            <button class="btn btn-primary" type="submit" id="login" >Sign in</button>
+                            <button class="btn btn-secondary" type="submit" id="signin">Sign up</button>
+                        </div>
+                    </form>
+
+                </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+<div id="app" style="padding-left: 50px"></div>
+
+
+
+
+<!-- built files will be auto injected -->
+</body>
 </html>
+
+<script>
+
+</script>
+
 

@@ -12,9 +12,11 @@
   "dependencies": {
     "@intervolga/optimize-cssnano-plugin": "^1.0.1",
     "axios": "^0.21.1",
+    "bootstrap": "^5.0.1",
     "copy-webpack-plugin": "^9.0.0",
     "core-js": "^3.6.5",
     "css-what": "^5.0.1",
+    "jquery": "^3.6.0",
     "ssri": "^8.0.1",
     "vue": "^2.6.11"
   },
