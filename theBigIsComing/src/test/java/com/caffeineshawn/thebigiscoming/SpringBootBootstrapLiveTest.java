@@ -1,6 +1,7 @@
 package com.caffeineshawn.thebigiscoming;
 
 import com.caffeineshawn.thebigiscoming.Entity.Book;
+import com.caffeineshawn.thebigiscoming.Entity.User;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -18,10 +19,11 @@ public class SpringBootBootstrapLiveTest {
 
     private static final String API_ROOT = "http://localhost:8081/api/books";
 
+
     private Book createRandomBook() {
         Book book = new Book();
-        book.setTitle("梁家河岁月No." + randomNumeric(1,10)+ randomNumeric(1,10)+ randomNumeric(1,10));
-        book.setAuthor("小熊维尼No."+ randomNumeric(1,10)+ randomNumeric(1,10)+ randomNumeric(1,10));
+        book.setTitle(randomNumeric(1,10)+ randomNumeric(1,10)+ randomNumeric(1,10));
+        book.setAuthor( randomNumeric(1,10)+ randomNumeric(1,10)+ randomNumeric(1,10));
         return book;
     }
 
@@ -127,6 +129,25 @@ public class SpringBootBootstrapLiveTest {
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
 
     }
+
+//    private User createNewUser() {
+//        User user = new User();
+//        user.setUsername("Lay Tim-sok");
+//        user.setPassword("114514");
+//        return user;
+//    }
+//
+//    @Test
+//    public void whenCreateNewUser_thenCreated() {
+//        User user = createNewUser();
+//        System.out.println(user.getUsername() + "/" + user.getPassword());
+//        Response response = RestAssured.given()
+//                .contentType(MediaType.APPLICATION_JSON_VALUE)
+//                .body(user)
+//                .post("localhost:8081/api/user/register");
+//
+//        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+//    }
 
 
 

@@ -1,0 +1,56 @@
+<template>
+  <form class="form-floating">
+    <div class="input-group row">
+      <div class="">
+      <label for="username" class="form-label">Username:{{username}}</label>
+      <input v-model="username" v-on:input="username=$event.target.value" type="text" class="form-control" placeholder="username" id="username"  aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="">
+      <label for="password" style="margin-top: 5px" class="form-label">Password:{{password}}</label>
+      <input v-model="password" v-on:input="password=$event.target.value" type="password-field"  class="form-control" id="password"  placeholder="请输入密码">
+    </div>
+    </div>
+
+    <div id="button-group" class="col" style="margin-top: 30px">
+      <button class="btn btn-outline-primary float-left" style="margin-right: 40px"   @click="login" id="login"  >Login</button>
+      <button class="btn btn-outline-secondary" style="margin-left: 40px" @click="register" id="register" >Register</button>
+    </div>
+  </form>
+</template>
+
+<script>
+
+import {postRequest} from "@/api/RESTfulAPI";
+
+export default {
+  name: "UserPanel",
+  data() {
+    return {
+      username:'',
+      password:'',
+      registerURL: '/api/user/register',
+      loginURL: '/api/user/login'
+    }
+
+  },
+  methods: {
+    register(){
+      let _this = this;
+      console.log("reg")
+      postRequest(_this.registerURL, {
+        username: _this.username,
+        password: _this.password
+      })
+    },
+    login(){
+      console.log("log")
+      let _this = this;
+      postRequest(_this.loginURL, {
+        username: _this.username,
+        password: _this.password
+      })
+    }
+
+  }
+}
+</script>

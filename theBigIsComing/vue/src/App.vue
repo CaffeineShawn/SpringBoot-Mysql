@@ -1,18 +1,16 @@
 <template>
   <div id='app'>
-    <AllBooks></AllBooks>
+    <router-view></router-view>
   </div>
 
 </template>
 
 <script>
 
-  import AllBooks from "@/components/AllBooks";
+
+
   export default {
     name: 'App',
-    components: {AllBooks}
-
-
 
 
   }

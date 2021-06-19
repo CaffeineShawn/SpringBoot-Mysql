@@ -15,69 +15,40 @@
         Please enable it to continue.</strong>
 </noscript>
 
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" style="padding-left: 40px;">图书管理系统</a>
+            <a class="navbar-brand"  style="margin-right: 40px;padding-left: 20px">图书管理系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#/login">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#/books">Books</a>
+                </li>
+            </ul>
         </div>
 
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" style="padding-right: 40px;" id="bs-example-navbar-collapse-1" >
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">欢迎用户: {{ username }}</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
+        <form class="d-flex" style="padding-right: 10px">
+            <input v-model="url" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
     </div><!-- /.container-fluid -->
+
+
 </nav>
 
-<div class="jumbotron" style="padding-top: 50px">
-    <div class="container">
-        <div class="row">
-            <div id="Welcome" class="col">
-                <h1>Powered By Bootstrap</h1>
-                <p>Used SpringBoot, Vue, JPA, MySQL for my Course Design.</p>
-                <h3>@Caffeine Shawn</h3>
-                <div id="more" style="padding-top: 10px">
-                    <p><a class="btn btn-info" href="https://github.com/CaffeineShawn" role="button">Learn more</a></p>
-                </div>
+<div id="app">
 
-            </div>
-
-
-                <div id="userinfo" class="col" style="margin: auto">
-
-                    <form class="form-floating">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="请输入用户名">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input  type="password-field" class="form-control" id="password" placeholder="请输入密码">
-                        </div>
-
-                        <div id="button-group" class="col" style="margin: auto">
-                            <button class="btn btn-primary" type="submit" id="login" >Sign in</button>
-                            <button class="btn btn-secondary" type="submit" id="signin">Sign up</button>
-                        </div>
-                    </form>
-
-                </div>
-
-
-
-
-        </div>
-    </div>
 </div>
-<div id="app" style="padding-left: 50px"></div>
 
 
-
-
-<!-- built files will be auto injected -->
 </body>
 </html>
 

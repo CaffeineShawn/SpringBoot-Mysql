@@ -1,6 +1,6 @@
 <template>
-  <div class="row" style="margin: auto">
-  <table class="table-bordered"  >
+  <div class="row" style="float: inside">
+  <table class="table-bordered table-hover">
     <thead>
     <tr>
       <th >ID</th>
@@ -18,8 +18,8 @@
         <th >{{  book.title  }}</th>
         <th >
           <div class="col justify-content-center">
-          <button class="btn btn-outline-dark"  type="submit" id="borrow" >borrow</button>
-          <button class="btn btn-outline-light" type="submit" id="back">back</button>
+          <button class="btn btn-primary" style="margin-right: 20px" type="submit" id="borrow" >borrow</button>
+          <button class="btn btn-warning" type="submit" id="back">back</button>
           </div>
         </th>
       </tr>
@@ -42,7 +42,7 @@ export default {
 
   created() {
     let _this = this;
-    this.getRequest('')
+    this.getRequest('/books')
         .then(function (response){
           _this.books = response.data;
           console.log(_this.books)
