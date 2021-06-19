@@ -9,6 +9,7 @@ import './assets/css/bootstrap.css'
 import './assets/js/bootstrap'
 import router from "./router"
 
+
 Vue.prototype.getRequest = getRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 Vue.prototype.putRequest = putRequest;
@@ -21,7 +22,7 @@ new Vue({
   el:'#app',
   router,
   components: {
-    App,
+    App
   },
   render: h => h(App)
 }).$mount('#app')

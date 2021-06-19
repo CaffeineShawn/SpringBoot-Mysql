@@ -1,4 +1,5 @@
 <template>
+  <div v-if="notLoggedIn">
   <form class="form-floating">
     <div class="input-group row">
       <div class="">
@@ -12,10 +13,11 @@
     </div>
 
     <div id="button-group" class="col" style="margin-top: 30px">
-      <button class="btn btn-outline-primary float-left" style="margin-right: 40px"   @click="login" id="login"  >Login</button>
-      <button class="btn btn-outline-secondary" style="margin-left: 40px" @click="register" id="register" >Register</button>
+      <button class="btn btn-outline-primary float-left" type="submit"  style="margin-right: 40px"   @click="login" id="login"  >Login</button>
+      <button class="btn btn-outline-secondary"  type="submit" style="margin-left: 40px" @click="register" id="register" >Register</button>
     </div>
   </form>
+  </div>
 </template>
 
 <script>
@@ -28,8 +30,9 @@ export default {
     return {
       username:'',
       password:'',
-      registerURL: '/api/user/register',
-      loginURL: '/api/user/login'
+      registerURL: '/user/register',
+      loginURL: '/user/login',
+      notLoggedIn: true
     }
 
   },
@@ -40,7 +43,15 @@ export default {
       postRequest(_this.registerURL, {
         username: _this.username,
         password: _this.password
+      }).then(function (response){
+
+        alert("注册成功")
+        console.log(response)
+      }).catch(function (err) {
+        alert("注册失败，该用户名已注册")
+        console.log(err)
       })
+
     },
     login(){
       console.log("log")
@@ -49,6 +60,15 @@ export default {
         username: _this.username,
         password: _this.password
       })
+      .then(function (response){
+        _this.notLoggedIn = false;
+        alert("登录成功")
+        console.log(response)
+      }).catch(function (err) {
+        alert("登录失败，请检查用户名和密码")
+        console.log(err)
+      })
+
     }
 
   }

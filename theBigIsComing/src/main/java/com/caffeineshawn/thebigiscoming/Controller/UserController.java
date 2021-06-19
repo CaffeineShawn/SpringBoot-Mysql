@@ -13,10 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080")
 public class UserController {
     @Autowired
     private UserService userService;
+
 
 
     @GetMapping
@@ -35,6 +36,7 @@ public class UserController {
         return userService.findUserByUserName(username);
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public  User create(@RequestBody User user) {
