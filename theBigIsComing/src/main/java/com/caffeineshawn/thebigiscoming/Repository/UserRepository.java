@@ -8,6 +8,5 @@ import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-    User findUserByUsername(String username);
-
+    List<User> findUserByUsername(String username);
 }

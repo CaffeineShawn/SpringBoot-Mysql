@@ -8,6 +8,7 @@ import {deleteRequest} from "./api/RESTfulAPI"
 import './assets/css/bootstrap.css'
 import './assets/js/bootstrap'
 import router from "./router"
+import store from "./store"
 
 
 Vue.prototype.getRequest = getRequest;
@@ -20,6 +21,7 @@ axios.defaults.baseURL = 'http://localhost:8081/'
 
 new Vue({
   el:'#app',
+  store,
   router,
   components: {
     App

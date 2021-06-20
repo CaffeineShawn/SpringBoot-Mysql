@@ -5,18 +5,21 @@ import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="book_table")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false,unique = true)
     private String title;
 
     @Column(nullable = false)
     private String author;
+
+
+    private int quantity = 1;
 
     public long getId() {
         return id;
@@ -28,6 +31,14 @@ public class Book {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setAuthor(String author) {

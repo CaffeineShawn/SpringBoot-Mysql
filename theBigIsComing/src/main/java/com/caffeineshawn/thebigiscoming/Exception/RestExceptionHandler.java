@@ -1,11 +1,12 @@
-package com.caffeineshawn.thebigiscoming.Controller;
+package com.caffeineshawn.thebigiscoming.Exception;
 
+import com.caffeineshawn.thebigiscoming.Exception.BookIdMismatchException;
+import com.caffeineshawn.thebigiscoming.Exception.BookNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;

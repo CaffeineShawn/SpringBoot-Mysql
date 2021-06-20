@@ -2,6 +2,8 @@ package com.caffeineshawn.thebigiscoming.Controller;
 
 
 import com.caffeineshawn.thebigiscoming.Entity.Book;
+import com.caffeineshawn.thebigiscoming.Exception.BookIdMismatchException;
+import com.caffeineshawn.thebigiscoming.Exception.BookNotFoundException;
 import com.caffeineshawn.thebigiscoming.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,11 @@ public class BookController {
     @GetMapping("/title/{bookTitle}")
     public List findByTitle(@PathVariable String bookTitle) {
         return bookRepository.findBookByTitle(bookTitle);
+    }
+
+    @GetMapping("/titles/{bookTitle}")
+    public List findByTitleLike(@PathVariable String bookTitle) {
+        return bookRepository.findBookByTitleLike("%" + bookTitle + "%");
     }
 
 
@@ -58,6 +65,7 @@ public class BookController {
         bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         return bookRepository.save(book);
     }
+
 
 
 }

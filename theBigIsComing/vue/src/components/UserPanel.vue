@@ -1,5 +1,5 @@
 <template>
-  <div v-if="notLoggedIn">
+  <div v-if="!$store.state.isLoggedIn">
   <form class="form-floating">
     <div class="input-group row">
       <div class="">
@@ -13,8 +13,8 @@
     </div>
 
     <div id="button-group" class="col" style="margin-top: 30px">
-      <button class="btn btn-outline-primary float-left" type="submit"  style="margin-right: 40px"   @click="login" id="login"  >Login</button>
-      <button class="btn btn-outline-secondary"  type="submit" style="margin-left: 40px" @click="register" id="register" >Register</button>
+      <button class="btn btn-outline-primary float-left"  type="submit"  style="margin-right: 40px"   @click="login" id="login"  >Login</button>
+      <button class="btn btn-outline-danger"  style="margin-left: 40px"  @click="register" id="register" >Register</button>
     </div>
   </form>
   </div>
@@ -23,9 +23,13 @@
 <script>
 
 import {postRequest} from "@/api/RESTfulAPI";
+import App from "@/App";
 
 export default {
   name: "UserPanel",
+  components: {
+    'parent': App
+  },
   data() {
     return {
       username:'',
@@ -44,9 +48,9 @@ export default {
         username: _this.username,
         password: _this.password
       }).then(function (response){
-
         alert("注册成功")
         console.log(response)
+
       }).catch(function (err) {
         alert("注册失败，该用户名已注册")
         console.log(err)
@@ -63,6 +67,8 @@ export default {
       .then(function (response){
         _this.notLoggedIn = false;
         alert("登录成功")
+        _this.$store.state.isLoggedIn = true
+        _this.$store.state.currentUser = _this.username
         console.log(response)
       }).catch(function (err) {
         alert("登录失败，请检查用户名和密码")

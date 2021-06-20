@@ -1,4 +1,4 @@
-package com.caffeineshawn.thebigiscoming.Controller;
+package com.caffeineshawn.thebigiscoming.Exception;
 
 public class BookNotFoundException extends RuntimeException {
 

@@ -1,57 +1,137 @@
 <template>
-  <div class="row" style="float: inside">
-  <table class="table-bordered table-hover">
+<div class="container-fluid">
+  <div >
+  <table class=" table row-md-8">
     <thead>
     <tr>
-      <th >ID</th>
-      <th >Author</th>
-      <th >Title</th>
-      <th >Operation</th>
+      <th scope="col">ID</th>
+      <th scope="col">Author</th>
+      <th scope="col">Title</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Operation</th>
     </tr>
     </thead>
 
     <tbody>
 
-      <tr v-for="book in books" :key="book.id">
-        <th >{{  book.id  }}</th>
-        <th >{{  book.author  }}</th>
-        <th >{{  book.title  }}</th>
-        <th >
-          <div class="col justify-content-center">
-          <button class="btn btn-primary" style="margin-right: 20px" type="submit" id="borrow" >borrow</button>
-          <button class="btn btn-warning" type="submit" id="back">back</button>
+      <tr v-for="book in bookList" :key="book.id" >
+        <th scope="row">{{  book.id  }}</th>
+        <td >{{  book.author  }}</td>
+        <td >{{  book.title  }}</td>
+        <td >{{  book.quantity }}</td>
+        <td >
+          <div class="col justify-content-center" id="buttons-group-admin" v-if="authLevel == 'admin'">
+          <a :href="'#/books/edit?id=' + book.id" class="btn btn-primary" style="margin-right: 20px" type="button" id="Edit"   >Edit</a>
+            <button class="btn btn-danger" id="delete"  @click="deleteBook(book.id)">Delete</button>
           </div>
-        </th>
-      </tr>
 
+          <div class="col justify-content-center" id="buttons-group-default" v-if="authLevel == 'defaultUser'">
+            <button class="btn btn-secondary" style="margin-right: 20px" type="button" id="borrow"   >Borrow</button>
+            <button class="btn btn-light" id="return"  @click="deleteBook(book.id)">Return</button>
+          </div>
+        </td>
+      </tr>
     </tbody>
+
+
+
+
   </table>
+<!--    <a @click="queryAuth">kkp</a>-->
   </div>
+  <div class="row-md-4">
+    <router-view></router-view>
+
+  </div>
+</div>
 </template>
 
 <script>
+
+
 
 
 export default {
   name:'AllBooks',
   data() {
     return {
-      books: null
+      authLevel: '',
+      bookList: {
+      }
     }
   },
 
-  created() {
-    let _this = this;
-    this.getRequest('/books')
-        .then(function (response){
-          _this.books = response.data;
-          console.log(_this.books)
+  methods: {
+      getBooks() {
+        let _this = this;
+        this.getRequest('/books')
+            .then(function (response){
+              _this.bookList = response.data;
+              console.log(_this.bookList)
+            })
+    },
+    deleteBook(id) {
+      if (this.$store.state.isLoggedIn == false) {
+        alert('请先登录')
+        this.$router.push('/login')
+      } else {
+        let _this = this;
+      console.log('/books' + '/' + id)
+        this.deleteRequest('/books' + '/' + id)
+            .then(function (response) {
+              console.log(response)
+              _this.getBooks()
+              _this.reload()
+            }).catch(err => {
+          console.log(err)
+          _this.authLevel = 'notLoggedIn'
         })
-  }
+    }
+    },
+
+    reload() {
+        this.$forceUpdate()
+    },
+    queryAuth() {
+      if (this.$store.state.currentUser != null && this.$store.state.isLoggedIn) {
+        let _this = this
+        this.getRequest('/user/' + this.$store.state.currentUser + '/group')
+            .then(res => {
+              console.log(res.data)
+              _this.authLevel = res.data
+            }).catch(err => {
+          console.log(err)
+        })
+      } else return false
+    }
+
+  },
+
+  created() {
+      this.getBooks()
+      this.queryAuth()
+  },
+  watch: {
+    $route: {
+      handler: function(val, oldVal){
+        let regex = "^/books/edit"
+        let re = new RegExp(regex)
+        // console.log("regex matched:"+re.test(oldVal.path))
+        if (oldVal.path == "/books/add" || re.test(oldVal.path) || oldVal.path == "/books") {
+          // console.log("getBooks")
+
+          this.getBooks()
+          this.$forceUpdate()
+        }
+      },
+      // 深度观察监听
+      deep: true
+    }
+  },
 
 }
 </script>
-
 <style scoped>
 
 </style>
+

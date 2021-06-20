@@ -1,7 +1,8 @@
 <template>
-  <div id='app'>
+  <div id='app' style="margin: 0px">
     <Navbar></Navbar>
     <router-view></router-view>
+
   </div>
 
 </template>
@@ -16,9 +17,15 @@
   export default {
     name: 'App',
     components: {
-       Navbar
+        Navbar,
 
-    }
+    },
+    data() {
+      return {
+        userName: sessionStorage.userName
+      }
+    },
+
   }
 
 
