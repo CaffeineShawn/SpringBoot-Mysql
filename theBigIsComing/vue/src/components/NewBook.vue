@@ -79,8 +79,8 @@ export default {
       if (re.test(this.quantity) || re.test(this.title) || re.test(this.author) || this.quantity==''||this.title==''||this.author=='') {
         alert('输入不能为空')
         return false
-      } else if (reNum.test(this.quantity) == false) {
-        alert('输入的数量错误: 必须为五位以内纯数字')
+      } else if (reNum.test(this.quantity) == false || this.quantity == 0)  {
+        alert('输入的数量错误: 必须为五位以内纯数字且大于0')
         return false
       }
       console.log("checked success")

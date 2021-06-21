@@ -62,13 +62,13 @@ export default {
   },
 
   methods: {
-      getBooks() {
-        let _this = this;
-        this.getRequest('/books')
-            .then(function (response){
-              _this.bookList = response.data;
-              console.log(_this.bookList)
-            })
+    getBooks() {
+      let _this = this;
+      this.getRequest('/books')
+          .then(function (response) {
+            _this.bookList = response.data;
+            console.log(_this.bookList)
+          })
     },
     deleteBook(id) {
       if (this.$store.state.isLoggedIn == false) {
@@ -76,7 +76,7 @@ export default {
         this.$router.push('/login')
       } else {
         let _this = this;
-      console.log('/books' + '/' + id)
+        console.log('/books' + '/' + id)
         this.deleteRequest('/books' + '/' + id)
             .then(function (response) {
               console.log(response)
@@ -86,11 +86,11 @@ export default {
           console.log(err)
           _this.authLevel = 'notLoggedIn'
         })
-    }
+      }
     },
 
     reload() {
-        this.$forceUpdate()
+      this.$forceUpdate()
     },
     queryAuth() {
       if (this.$store.state.currentUser != null && this.$store.state.isLoggedIn) {
@@ -119,7 +119,6 @@ export default {
         // console.log("regex matched:"+re.test(oldVal.path))
         if (oldVal.path == "/books/add" || re.test(oldVal.path) || oldVal.path == "/books") {
           // console.log("getBooks")
-
           this.getBooks()
           this.$forceUpdate()
         }

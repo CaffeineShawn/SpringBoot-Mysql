@@ -1,22 +1,38 @@
 <template>
-  <div v-if="!$store.state.isLoggedIn">
-  <form class="form-floating">
-    <div class="input-group row">
-      <div class="">
-      <label for="username" class="form-label">Username:{{username}}</label>
-      <input v-model="username" v-on:input="username=$event.target.value" type="text" class="form-control" placeholder="username" id="username"  aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-    <div class="">
-      <label for="password" style="margin-top: 5px" class="form-label">Password:{{password}}</label>
-      <input v-model="password" v-on:input="password=$event.target.value" type="password-field"  class="form-control" id="password"  placeholder="请输入密码">
-    </div>
-    </div>
+  <div v-if="!$store.state.isLoggedIn" class="container-fluid">
+  <div class="text-end" >
+<!--    <div class="input-group row ">-->
+<!--      <div class="">-->
+<!--      <label for="username" class="form-label">Username</label>-->
+<!--      <input v-model="username" v-on:input="username=$event.target.value" type="text" class="form-control" placeholder="username" id="username"  aria-label="Username" aria-describedby="basic-addon1">-->
+<!--    </div>-->
+<!--    <div class="">-->
+<!--      <label for="password" style="margin-top: 5px" class="form-label">Password</label>-->
+<!--      <input v-model="password" v-on:input="password=$event.target.value" type="password-field"  class="form-control" id="password"  placeholder="请输入密码">-->
+<!--    </div>-->
 
-    <div id="button-group" class="col" style="margin-top: 30px">
+    <div class="text-center">
+      <h2  style="padding-bottom: 20px">User Panel</h2>
+      <div class="mb-3 row">
+        <label for="username" class="col-sm-4 col-form-label">Username</label>
+        <div class="col-sm-4">
+          <input type="text" v-model="username" class="form-control" id="username">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="password" class="col-sm-4 col-form-label">Password</label>
+        <div class="col-sm-4">
+          <input type="password" v-model="password" class="form-control" id="password">
+        </div>
+      </div>
+    </div>
+<!--    </div>-->
+
+    <div id="button-group" class="col text-center" style="margin-top: 30px">
       <button class="btn btn-outline-primary float-left"  type="submit"  style="margin-right: 40px"   @click="login" id="login"  >Login</button>
       <button class="btn btn-outline-danger"  style="margin-left: 40px"  @click="register" id="register" >Register</button>
     </div>
-  </form>
+  </div>
   </div>
 </template>
 
@@ -44,37 +60,52 @@ export default {
     register(){
       let _this = this;
       console.log("reg")
-      postRequest(_this.registerURL, {
-        username: _this.username,
-        password: _this.password
-      }).then(function (response){
-        alert("注册成功")
-        console.log(response)
+      if (this.checkInput() == true) {
+        postRequest(_this.registerURL, {
+          username: _this.username,
+          password: _this.password
+        }).then(function (response) {
+          alert("注册成功")
+          console.log(response)
 
-      }).catch(function (err) {
-        alert("注册失败，该用户名已注册")
-        console.log(err)
-      })
+        }).catch(function (err) {
+          alert("注册失败，该用户名已注册")
+          console.log(err)
+        })
+      }
 
     },
     login(){
       console.log("log")
-      let _this = this;
-      postRequest(_this.loginURL, {
-        username: _this.username,
-        password: _this.password
-      })
-      .then(function (response){
-        _this.notLoggedIn = false;
-        alert("登录成功")
-        _this.$store.state.isLoggedIn = true
-        _this.$store.state.currentUser = _this.username
-        console.log(response)
-      }).catch(function (err) {
-        alert("登录失败，请检查用户名和密码")
-        console.log(err)
-      })
+      if (this.checkInput() == true) {
+        let _this = this;
+        postRequest(_this.loginURL, {
+          username: _this.username,
+          password: _this.password
+        })
+            .then(function (response) {
+              _this.notLoggedIn = false;
+              alert("登录成功")
+              _this.$store.state.isLoggedIn = true
+              _this.$store.state.currentUser = _this.username
+              console.log(response)
+              _this.$router.push("/books")
+            }).catch(function (err) {
+          alert("登录失败，请检查用户名和密码")
+          console.log(err)
+        })
+      }
 
+    },
+    checkInput() {
+        let regex = "^[ ]+$"
+        let re = new RegExp(regex)
+      if (this.username == '' || this.password == '' || re.test(username) || re.test(password)) {
+        alert("输入的用户名和密码不能为纯空格或空")
+        return false
+      } else {
+        return true
+      }
     }
 
   }

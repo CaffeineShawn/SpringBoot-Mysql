@@ -27,7 +27,7 @@
         <input type="text"  v-model="quantity" class="form-control" id="quantity">
       </td>
       <td>
-        <button type="button" class="btn" @click="submitCheckedBook(id)">Submit</button>
+        <button type="button" class="btn" @click="updateBook(id)">Submit</button>
         <button type="button" class="btn btn-outline-danger" @click="resetInput">Reset</button>
       </td>
       </tbody>
@@ -77,36 +77,36 @@ export default {
       if (re.test(this.quantity) || re.test(this.title) || re.test(this.author) || this.quantity==''||this.title==''||this.author=='') {
         alert('输入不能为空')
         return false
-      } else if (reNum.test(this.quantity) == false) {
-        alert('输入的数量错误: 必须为五位以内纯数字')
+      } else if (reNum.test(this.quantity) == false || this.quantity == 0)  {
+        alert('输入的数量错误: 必须为五位以内纯数字且大于0')
         return false
       }
       console.log("checked success")
       return true;
     },
-    submitCheckedBook(id) {
-      if (this.checkedBook() == true) {
-        this.updateBook(id)
-      }
 
-    },
+
+
     updateBook(id) {
       let _this = this
-      this.putRequest('/books/' + id, {
-        author: _this.author,
-        title: _this.title,
-        quantity: _this.quantity,
-        id: _this.id
-      }).then(res => {
-        if (res.status == 200) {
-          _this.$router.push("/books")
-        }
+      if (this.checkedBook() == true) {
+        this.putRequest('/books/' + id, {
+          author: _this.author,
+          title: _this.title,
+          quantity: _this.quantity,
+          id: _this.id
+        }).then(res => {
+          if (res.status == 200) {
+            _this.$router.push("/books")
+          }
 
-      }).catch(err => {
-        console.log(err)
-      });
-
+        }).catch(err => {
+          console.log(err)
+        });
+      }
     }
+
+
 
 
   },

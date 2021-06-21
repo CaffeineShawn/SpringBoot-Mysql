@@ -1,9 +1,12 @@
 <template>
   <div align="center" class="container-fluid">
-    <form class="form-control col">
-  <input v-model="titleLike" v-on:input="titleLike=$event.target.value" class="input-group-text" id="titleLike" type="text" placeholder="请输入要搜索的图书名">
-  <button @click="search"  class="btn btn-outline-secondary">搜索</button>
-    </form>
+
+    <div class="input-group mb-3 text-left" style="max-width: 400px;padding-top: 100px">
+
+      <input type="text" class="form-control" placeholder="请输入要搜索的标题关键字" id="titleLike" v-model="titleLike" >
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2"  @click="search">Search</button>
+    </div>
+    <h2 class="text-center" style="padding-top: 100px">搜索结果</h2>
 
     <div >
       <table class=" table row-md-8">
@@ -67,13 +70,27 @@ export default {
     },
     search() {
       let _this = this
-      getRequest('/books/titles/' + _this.titleLike)
-          .then(res => {
-            _this.books = res.data
-            console.log(res.data)
-          }).catch(err => {
-        console.log(err);
-      });
+      if (this.checkInput() == true) {
+        getRequest('/books/titles/' + _this.titleLike)
+            .then(res => {
+              _this.books = res.data
+              console.log(res.data)
+            }).catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    checkInput() {
+      let regex = "^[ ]+$"
+      let re = new RegExp(regex)
+      if (this.titleLike == '' || re.test(this.titleLike)) {
+        alert("输入的标题关键字不能为纯空格或空")
+        return false
+      } else if (this.titleLike.length > 20){
+        alert("输入的标题关键字长度不能大于20")
+        return false
+      }
+      return true
     }
   },
   created() {
