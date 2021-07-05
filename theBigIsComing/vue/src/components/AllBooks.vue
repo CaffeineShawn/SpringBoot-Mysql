@@ -26,8 +26,8 @@
           </div>
 
           <div class="col justify-content-center" id="buttons-group-default" v-if="authLevel == 'defaultUser'">
-            <button class="btn btn-secondary" style="margin-right: 20px" type="button" id="borrow"   >Borrow</button>
-            <button class="btn btn-light" id="return"  @click="deleteBook(book.id)">Return</button>
+            <button @click="borrowBook(book.id)" class="btn btn-secondary" style="margin-right: 20px" type="button" id="borrow"   >Borrow</button>
+            <button class="btn btn-light" id="return"  @click="returnBook(book.id)">Return</button>
           </div>
         </td>
       </tr>
@@ -57,7 +57,8 @@ export default {
     return {
       authLevel: '',
       bookList: {
-      }
+      },
+
     }
   },
 
@@ -85,6 +86,65 @@ export default {
             }).catch(err => {
           console.log(err)
           _this.authLevel = 'notLoggedIn'
+        })
+      }
+    },
+    borrowBook(bookId) {
+      if (this.$store.state.isLoggedIn == false) {
+        alert('请先登录')
+        this.$router.push('/login')
+      } else {
+        let _this = this;
+        console.log(bookId)
+        console.log(this.$store.state.currentUserId)
+
+          this.postRequest('/books/borrow', {
+            bookId: bookId,
+            userId: this.$store.state.currentUserId,
+            quantity: 1
+          })
+              .then(response => {
+                if (response.data.bookId != null) {
+                  alert('借书成功')
+                } else {
+                  alert('借书失败，您已借过该书或该书数量不足')
+                }
+
+
+                _this.getBooks();
+                _this.reload()
+              }).catch(res => {
+            console.log(res)
+            _this.authLevel = 'notLoggedIn'
+          });
+
+      }
+    },
+    userRecord() {
+      let _this = this
+      this.getRequest('/user/' + this.$store.state.currentUserId)
+      .then(function (response) {
+          console.log(response)
+      })
+      return false
+    },
+    returnBook(bookId) {
+      if (this.$store.state.isLoggedIn == false) {
+        alert('请先登录')
+        this.$router.push('/login')
+      } else {
+        let _this = this;
+        console.log(bookId)
+        console.log(this.$store.state.currentUserId)
+        this.deleteRequest('/books/borrow/' + this.$store.state.currentUserId +'/' +bookId)
+            .then(function (response) {
+              console.log(response)
+              alert('还书成功')
+              _this.getBooks()
+              _this.reload()
+            }).catch(err => {
+          console.log(err)
+          alert('您没有该书的借书记录！')
         })
       }
     },

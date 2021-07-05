@@ -27,4 +27,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleBadRequest(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler({BookUserNotFoundException.class})
+    protected ResponseEntity<Object> handleRecordNotFound(Exception e, WebRequest request) {
+        return handleExceptionInternal(e, "User's borrow record not found", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler({AlreadyBorrowedException.class})
+    protected ResponseEntity<Object> handleRecordAlreadyExisted(Exception e, WebRequest request) {
+        return handleExceptionInternal(e, "User have already borrowed this book", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
 }

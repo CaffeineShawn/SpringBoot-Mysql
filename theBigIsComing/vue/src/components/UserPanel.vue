@@ -52,6 +52,7 @@ export default {
       password:'',
       registerURL: '/user/register',
       loginURL: '/user/login',
+      rootURL:'/user',
       notLoggedIn: true
     }
 
@@ -78,7 +79,7 @@ export default {
     login(){
       console.log("log")
       if (this.checkInput() == true) {
-        let _this = this;
+        let _this = this
         postRequest(_this.loginURL, {
           username: _this.username,
           password: _this.password
@@ -89,6 +90,7 @@ export default {
               _this.$store.state.isLoggedIn = true
               _this.$store.state.currentUser = _this.username
               console.log(response)
+              _this.getUserId()
               _this.$router.push("/books")
             }).catch(function (err) {
           alert("登录失败，请检查用户名和密码")
@@ -96,6 +98,17 @@ export default {
         })
       }
 
+    },
+    getUserId() {
+      if (this.$store.state.currentUser != null) {
+        let url = this.rootURL + "/" + this.$store.state.currentUser
+        console.log("url:" +url)
+        let _this = this
+        this.getRequest(url).then(function (res) {
+          _this.$store.state.currentUserId = res.data[0].id
+          console.log(_this.$store.state.currentUserId)
+        })
+      }
     },
     checkInput() {
         let regex = "^[ ]+$"

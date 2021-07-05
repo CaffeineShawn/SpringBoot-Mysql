@@ -73,6 +73,7 @@ export default {
     async logout() {
       this.$store.state.isLoggedIn = false
       this.$store.state.currentUser = false
+      alert('Bye')
       await this.$router.push('login')
       this.$forceUpdate()
     },
