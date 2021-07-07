@@ -15,7 +15,6 @@
       <tbody>
       <td>
 
-
       <th scope="row"></th>
       <td>
         <input type="text"   v-model="author" class="form-control"  id="author">
@@ -62,7 +61,7 @@ export default {
           title: _this.title,
           quantity: _this.quantity
         }).then(function (response) {
-          console.log("提交成功")
+          alert("增加图书成功")
           console.log(response.data.success)
             _this.$router.push("/books")
         })

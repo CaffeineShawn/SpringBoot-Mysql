@@ -81,11 +81,12 @@ export default {
         this.deleteRequest('/books' + '/' + id)
             .then(function (response) {
               console.log(response)
+              alert('删除该书成功')
               _this.getBooks()
               _this.reload()
             }).catch(err => {
           console.log(err)
-          _this.authLevel = 'notLoggedIn'
+
         })
       }
     },
@@ -109,25 +110,15 @@ export default {
                 } else {
                   alert('借书失败，您已借过该书或该书数量不足')
                 }
-
-
                 _this.getBooks();
                 _this.reload()
               }).catch(res => {
             console.log(res)
-            _this.authLevel = 'notLoggedIn'
-          });
 
+          });
       }
     },
-    userRecord() {
-      let _this = this
-      this.getRequest('/user/' + this.$store.state.currentUserId)
-      .then(function (response) {
-          console.log(response)
-      })
-      return false
-    },
+
     returnBook(bookId) {
       if (this.$store.state.isLoggedIn == false) {
         alert('请先登录')

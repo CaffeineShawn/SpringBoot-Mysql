@@ -1,4 +1,4 @@
-package com.caffeineshawn.thebigiscoming.Service;
+package com.caffeineshawn.thebigiscoming.Controller;
 
 import com.caffeineshawn.thebigiscoming.Entity.User;
 import com.caffeineshawn.thebigiscoming.Repository.UserRepository;
@@ -47,10 +47,4 @@ public class UserService {
         }
     }
 
-    public String getUserRole(String username) {
-        List<User> userList = userRepository.findUserByUsername(username);
-        if (userList != null) {
-            return userList.get(0).getRole();
-        } else return null;
-    }
 }

@@ -1,6 +1,5 @@
 package com.caffeineshawn.thebigiscoming.Controller;
 
-import com.caffeineshawn.thebigiscoming.Service.UserService;
 import com.caffeineshawn.thebigiscoming.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,6 @@ public class UserController {
     public String userGroup(@PathVariable String username) {
         return userService.getUserGroup(username);
     }
-
 
 
 }

@@ -77,14 +77,5 @@ public class BorrowBooksController {
 
 
 
-//    @PutMapping("/{id}")
-//    public BookUser updateBorrowRecord(@RequestBody BookUser bookUser, @PathVariable Long bookId) {
-//        if (bookRepository.findById(bookId) == null) {
-//            throw new BookNotFoundException();
-//        }
-//
-//
-//        bookUserRepository.findByUserIdAAndAndBookId(bookUser.getUserId(),bookUser.getBookId());
-//        return bookUserRepository.save(bookUser);
-//    }
+
 }

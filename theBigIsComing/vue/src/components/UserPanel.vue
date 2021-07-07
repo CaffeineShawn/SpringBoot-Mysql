@@ -1,15 +1,6 @@
 <template>
   <div v-if="!$store.state.isLoggedIn" class="container-fluid">
   <div class="text-end" >
-<!--    <div class="input-group row ">-->
-<!--      <div class="">-->
-<!--      <label for="username" class="form-label">Username</label>-->
-<!--      <input v-model="username" v-on:input="username=$event.target.value" type="text" class="form-control" placeholder="username" id="username"  aria-label="Username" aria-describedby="basic-addon1">-->
-<!--    </div>-->
-<!--    <div class="">-->
-<!--      <label for="password" style="margin-top: 5px" class="form-label">Password</label>-->
-<!--      <input v-model="password" v-on:input="password=$event.target.value" type="password-field"  class="form-control" id="password"  placeholder="请输入密码">-->
-<!--    </div>-->
 
     <div class="text-center">
       <h2  style="padding-bottom: 20px">User Panel</h2>
@@ -74,7 +65,6 @@ export default {
           console.log(err)
         })
       }
-
     },
     login(){
       console.log("log")
@@ -97,8 +87,8 @@ export default {
           console.log(err)
         })
       }
-
     },
+
     getUserId() {
       if (this.$store.state.currentUser != null) {
         let url = this.rootURL + "/" + this.$store.state.currentUser
